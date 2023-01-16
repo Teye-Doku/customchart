@@ -1,0 +1,19 @@
+deployment:
+  name: nginx-depl
+  replicas: 1
+  pod:
+    name: nginx-pod
+    container:
+      name: nginx-container
+      image: nginx 
+      pullPolicy: IfNotPresent
+      port: 
+        name: http 
+        containerPort: 80
+        protocol: TCP
+
+service:
+  name: ngnix-service
+  type: NodePort
+  port:
+    name: nginx-port        

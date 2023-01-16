@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      {{- include "superapp.selectedLabels" . | nindent 6}}
+  template:
+    metadata:
+      name: {{ .Values.deployment.pod.name }}   
+      labels:
+        {{- include "superapp.selectedLabels" . | nindent 8}}
+    spec:
+      containers:
+        - name: {{ .Values.deployment.pod.container.name }}
+          image: {{ .Values.deployment.pod.container.image }}
+          imagePullPolicy: {{ .Values.deployment.pod.container.pullPolicy}}
+          ports:
+            - name: {{ .Values.deployment.pod.container.port.name }} 
+              containerPort: {{ .Values.deployment.pod.container.port.containerPort }} 
+              protocol: {{ .Values.deployment.pod.container.port.protocol}}       

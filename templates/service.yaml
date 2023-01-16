@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "superapp.selectedLabels" . | nindent 4}}
+  ports:
+    - name: {{ .Values.service.port.name }}
+      port: {{ .Values.deployment.pod.container.port.containerPort }}
+      protocol: {{ .Values.deployment.pod.container.port.protocol }}  
+      targetPort: {{ .Values.deployment.pod.container.port.name }}
