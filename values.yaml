@@ -16,4 +16,7 @@ service:
   name: ngnix-service
   type: NodePort
   port:
-    name: nginx-port        
+    name: nginx-port    
+
+autoscaling:
+  enabled: false        

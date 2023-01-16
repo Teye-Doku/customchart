@@ -3,7 +3,9 @@ kind: Deployment
 metadata:
   name: {{ .Values.deployment.name }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.deployment.replicas }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "superapp.selectedLabels" . | nindent 6}}
